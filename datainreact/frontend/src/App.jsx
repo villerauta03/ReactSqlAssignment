@@ -5,11 +5,11 @@ import ReadUsers from "./components/ReadUsers.jsx";
 function App() {
   return (
     <div className="container">
-      <div className="row">  {/* Bootstrap row */}
-        <div className="col-md-6">  {/* 6 columns for CreateUser */}
+      <div className="row">
+        <div className="col-md-6">
           <CreateUser />
         </div>
-        <div className="col-md-6">  {/* 6 columns for ReadUsers */}
+        <div className="col-md-6">
           <ReadUsers />
         </div>
       </div>

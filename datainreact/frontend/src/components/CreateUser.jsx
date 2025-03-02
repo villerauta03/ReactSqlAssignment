@@ -6,6 +6,7 @@ export default function CreateUser() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,10 +16,12 @@ export default function CreateUser() {
       const response = await axios.post("http://localhost:3000/users", {
         name,
         email,
+        address,
       });
       setMessage("User created successfully: " + response.data.name);
       setName("");
       setEmail("");
+      setAddress("");
     } catch (error) {
       setMessage("Error: " + (error.response?.data?.error || error.message));
     }
@@ -41,6 +44,14 @@ export default function CreateUser() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <br/>
+        <input
+          type="text"
+          placeholder="Address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
           required
         />
         <br/>

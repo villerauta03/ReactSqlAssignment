@@ -29,6 +29,7 @@ export default function ReadUsers() {
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Address</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,7 @@ export default function ReadUsers() {
                             <td>{user.id}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
+                            <td>{user.address}</td>
                         </tr>
                     ))}
                 </tbody>

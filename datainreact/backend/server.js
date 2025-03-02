@@ -32,6 +32,10 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
+    },
+    address: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 }, {
     timestamps: false
@@ -45,11 +49,11 @@ sequelize.sync()
 // Create a new user (Create)
 app.post('/users', async (req, res) => {
     try {
-        const { name, email } = req.body;
-        if (!name || !email) {
-            return res.status(400).json({ error: 'Name and email are required' });
+        const { name, email, address } = req.body;
+        if (!name || !email || !address) {
+            return res.status(400).json({ error: 'Name, email, and address are required' });
         }
-        const user = await User.create({ name, email });
+        const user = await User.create({ name, email, address });
         res.status(201).json(user);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -69,10 +73,10 @@ app.get('/users', async (req, res) => {
 // Update user information (Update)
 app.put('/users/:id', async (req, res) => {
     try {
-        const { name, email } = req.body;
+        const { name, email, address } = req.body;
         const { id } = req.params;
-        if (!name || !email) {
-            return res.status(400).json({ error: 'Name and email are required' });
+        if (!name || !email || !address) {
+            return res.status(400).json({ error: 'Name, email and address are required' });
         }
         const user = await User.findByPk(id);
         if (!user) {
@@ -80,6 +84,7 @@ app.put('/users/:id', async (req, res) => {
         }
         user.name = name;
         user.email = email;
+        user.address = address;
         await user.save();
         res.json({ message: 'User information updated', user });
     } catch (err) {
